@@ -1,7 +1,7 @@
 %--- Chapter 4 ----------------------------------------------------------------% 
 \chapter{Methodology}  \label{ScalabilityModel}
 
-In the previous chapters, we gave a short synopsis of what the framework tries to achieve and why we need it. We also briefly discussed the supporting concepts required for understanding the framework. In this chapter, we describe the in-depth concepts behind the framework along with explaning why we implemented a particular technique and all the other alternative techniques that we tried or contemplated trying. Although this chapter covers details about all implementations and techniques we tried, information on why some of the methods failed or problems with implementations are discussed in the results and analysis section. 
+In the previous chapters, we gave a short synopsis of what the framework tries to achieve and why we need it. We also briefly discussed the supporting concepts required for understanding the framework. In this chapter, we describe the in-depth concepts behind the framework along with explaining why we implemented a particular technique and all the other alternative techniques that we tried or contemplated trying. Although this chapter covers details about all implementations and techniques we tried, information on why some of the methods failed or problems with implementations are discussed in the results and analysis section. 
 
 We have previously mentioned that our framework provides selection techniques for two broad classes of problems, namely, parallel graph processing and system of linear equations. To maintain the specified structure, this chapter will be sub-categorized into each of those problems. 
 
@@ -46,9 +46,9 @@ The metadata of each experiment acts as the features upon which a prediction mod
   \item Number of edges
   \item Number of Threads
 \end{enumerate}
-The number of vertices has a correlation coefficient of 0.86 towards influencing the execution time. This is quite straightforward as execution time is largely dependent on the size of the graph.
+The number of vertices has a correlation coefficient of 0.86 with respect to execution time. This is expected since execution time is largely dependent on the size of the graph.
 
-Consequently, so is the number of edges with a coefficient of 0.81. The number of threads follows behind with a coefficient of 0.77 as it determines the communication complexity and time lost in transferring data. The next set of features relates to the density and connectivity of the graph: 
+Similarly, the number of edges is correlated with execution time with a coefficient of 0.81. The number of threads follows behind with a coefficient of 0.77 as it determines the communication complexity and time lost in transferring data. The next set of features relates to the density and connectivity of the graph: 
 
 \begin{figure*}
     \centering
@@ -120,7 +120,7 @@ To avoid this, we encode the category into a 1-hot vector where the position in 
 \todo{Give table with actual example}
 
 \subsubsection{Fitting the model}
-After complete prepossessing, the learning set is ready for training. In this thesis, we will discuss four different configurations of models used with each one slightly tuned based on the previous. Results from each configuration and its analysis are discussed in the next chapter. \\
+After completing prepossessing, the learning set is ready for training. In this thesis, we will discuss four different configurations of models used with each one slightly tuned based on the previous. Results from each configuration and its analysis are discussed in the next chapter. \\
 
 \begin{enumerate}
     \item Linear regression with unnormalized learning set
@@ -130,7 +130,7 @@ After complete prepossessing, the learning set is ready for training. In this th
 \end{enumerate}
  
 
-By analyzing the data points, one can see that they are not linearly separable. But going ahead in that direction, we initially tried using linear regression. Before exploring options for normalizing the learning set, we wanted to see how the models fared on raw data to identify new strengths and weakness of each. The configurations with unnormalized learning set include features that aren't scaled to a 0-1 range.
+By analyzing the data points, we can see that they are not linearly separable. But going ahead in that direction, we initially tried using linear regression. Before exploring options for normalizing the learning set, we wanted to see how the models fared on raw data to identify new strengths and weakness of each. The configurations with unnormalized learning set include features that aren't scaled to a 0-1 range.
 
 Another problem we notice after analyzing the learning set is that the features undergo the phenomenon of multicollinearity. A collection of features are said to be multicollinear if they are linearly proportional to each other to a certain extent. In that case, the features can derive themselves from each other. This creates a problem as the main objective of regression analysis is to isolate independent features from each other and tune one feature at a time until predictions improve with keeping other features constant and thus finding the relationship between the dependent and independent features. But it's hard to estimate this relationship if the independent features change in unison. 
 
@@ -144,7 +144,9 @@ To validate the accuracy of the model, the learning set is further divided into 
 
 \todo{More on where the experiments were run(Talapas) and cost of feature extraction(Need to verify with Sam }
 
-\subsection{Classification of graph processing experiments}\\ \todo{The learning set and the features are the same. Hence I will bring those out with prediction and classification as subsections.}\\
+\subsection{Classification of graph processing experiments}
+\todo{The learning set and the features are the same. Hence I will bring those out with prediction and classification as subsections.}
+
 Predictive modeling of execution time is great, but interpreting and coming to a conclusion with such small values can be challenging. Minor inaccuracies in predictions will significantly add up across the course of an application running thousands of experiments. But instead, a user would greatly benefit if he knows if a specific package is worth using for a particular experiment. For this reason, we have implemented a classification framework that predicts a binary class label of "good" or "bad" based on the features of the graph dataset and hardware configurations.  
 
 \subsubsection{Preprocessing}
@@ -185,8 +187,9 @@ Even though it was established that the learning set is not linearly separable, 
 \todo{same as before}
 
 \todo{need to work on the transition. Seems a bit sudden}
+
 \section{Selection of solvers for a system of linear equations}
-\\For any software selection framework, a classification model based on performance is a great first step, but a binary classification has significant drawbacks on its own. First off, users need to provide their choice of package for which the framework will classify as "good" or "bad" based on the experiment setup. This is added work for a user who doesn't really care about the package and wants a good one to use. But more importantly, a binary classifier may yield a lot of possible good packages giving the user further decisions to make, thereby defeating the primary purpose of this framework. It would be a significant improvement if the framework could provide what the best package would be for that experiment. Or better yet, a ranked list of packages for that experiment.
+For any software selection framework, a classification model based on performance is a great first step, but a binary classification has significant drawbacks on its own. First off, users need to provide their choice of package for which the framework will classify as "good" or "bad" based on the experiment setup. This is added work for a user who doesn't really care about the package and wants a good one to use. But more importantly, a binary classifier may yield a lot of possible good packages giving the user further decisions to make, thereby defeating the primary purpose of this framework. It would be a significant improvement if the framework could provide what the best package would be for that experiment. Or better yet, a ranked list of packages for that experiment.
 
 \subsection{Ranking framework}
 To achieve the goal mentioned above, we look at a different class of application to the previous graph processing one. Specifically, we aim to provide a framework that gives a ranked list of linear solvers for a system of linear equation.
