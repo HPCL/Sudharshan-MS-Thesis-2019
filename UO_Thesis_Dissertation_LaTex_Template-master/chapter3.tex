@@ -1,6 +1,8 @@
 %--- Chapter 3 ----------------------------------------------------------------% 
 \chapter{BACKGROUND AND TOOLS } 
 \section{Tools for feature extraction}
+
+\todo{ a bit of text needed before subsections }
 \subsection{Beautiful soup}
 \section{Graph processing systems}
 For our first class of algorithms, we performed numerous experiments on graph datasets using six parallel graph processing packages. The first five packages were implemented using shared memory parallelism while we included one package that was implemented using distributed memory parallelism.
@@ -19,13 +21,21 @@ Both are graph benchmarking suites developed that aims at providing standardized
 It is a library that provides OpenMP reference implementations for graph algorithms similar to GAP but it uses a doubly compressed sparse row representation for input graphs.
 
 \subsection{Galois}
-IT is a multilevel programming model that also uses shared memory parallelism for it's reference implementation. It provides its own execution model for implementing algorithms on parallel setups.
+Galois is a multilevel programming model that also uses shared memory parallelism for it's reference implementation. It provides its own execution model for implementing algorithms on parallel setups.
 
 \subsection{PowerGraph}
 Unlike the other five chosen packages, PowerGraph uses distributed memory parallelism for reference implementations of  the mention algorithms. It also provides shared memory implementations but we focus only on the former variant in this framework. For storage, it uses its own novel schema on top of CSR.
 
 \todo{BN: these missing sections are nontrivial, I am getting a bit worried that it's empty}
- 
+
 \section{Algorithms}
+For the graph processing applications, we look at four different graph theoretic algorithms that the framework incorporates while for linear systems, we consider around 70 different solvers, which are in turn 70 different algorithms out of which, we will discuss the two baseline solvers used across our thesis. The four graph theoretic algorithms are :
+\subsection{Breadth-first search (BFS)}
+It is a search algorithm that iteratively traverses a tree or graph data structure for any specific query node. Starting at the root vertex, all the neighbouring vertices within the same depth level are explored before going deeper into a specific branch unlike depth-first search which does the opposite. It has a computational complexity of $O(V+E)$ where V and E denote the number of vertices and edges respectively. 
+\subsection{Single-source shortest path (SSSP)}
+It is a graph theoretic algorithm that identifies a path between any two vertices such that the sum of weight of edges between the two vertices are minimized \cite{johnson1977efficient}. It has a computational complexity of $O(V+E) log V$.
+\subsection{Page rank}
+
+
 \section{Machine learning models and validations}
 \section{Other stuff}
