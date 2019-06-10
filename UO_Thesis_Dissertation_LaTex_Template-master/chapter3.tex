@@ -1,2 +1,31 @@
 %--- Chapter 3 ----------------------------------------------------------------% 
-\chapter{BACKGROUND DEFINITIONS AND TOOLS } 
+\chapter{BACKGROUND AND TOOLS } 
+\section{Tools for feature extraction}
+\subsection{Beautiful soup}
+\section{Graph processing systems}
+For our first class of algorithms, we performed numerous experiments on graph datasets using six parallel graph processing packages. The first five packages were implemented using shared memory parallelism while we included one package that was implemented using distributed memory parallelism.
+
+\subsection{The Graph 500}
+This package provides reference OpenMP implementations for benchmarking graph algorithms using shared memory parallelism. They also provide distributed memory  and cloud/MapReduce implementations but we focus only on shared memory for this package. It accepts graphs in compressed sparse row (CSR) formats. 
+
+CSR is used to represent sparse matrices by using three vectors for storing the non-zero elements along with their count and indices, thereby removing the redundancy of storing zero elements.
+
+\todo{need to cite all packages}
+
+\subsection{The Graph Algorithm Platform (GAP) GraphBIG benchmark suite}
+Both are graph benchmarking suites developed that aims at providing standardized graph processing evaluations and optimized reference implementations for shared memory parallelism. They also use a CSR representation to store input graphs.
+
+\subsection{GraphMat}
+It is a library that provides OpenMP reference implementations for graph algorithms similar to GAP but it uses a doubly compressed sparse row representation for input graphs.
+
+\subsection{Galois}
+IT is a multilevel programming model that also uses shared memory parallelism for it's reference implementation. It provides its own execution model for implementing algorithms on parallel setups.
+
+\subsection{PowerGraph}
+Unlike the other five chosen packages, PowerGraph uses distributed memory parallelism for reference implementations of  the mention algorithms. It also provides shared memory implementations but we focus only on the former variant in this framework. For storage, it uses its own novel schema on top of CSR.
+
+\todo{BN: these missing sections are nontrivial, I am getting a bit worried that it's empty}
+ 
+\section{Algorithms}
+\section{Machine learning models and validations}
+\section{Other stuff}
